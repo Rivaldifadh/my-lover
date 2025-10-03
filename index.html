@@ -14,6 +14,7 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       overflow: hidden;
       background: linear-gradient(to top, #ff7e5f, #feb47b, #f7d794);
+      background-attachment: fixed;
     }
 
     #pinkboard {
@@ -24,6 +25,21 @@
       height: 100vh;
       z-index: 5;
       pointer-events: none;
+    }
+
+    /* ✨ Stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
     }
 
     /* Matahari */
@@ -224,9 +240,21 @@
       line-height: 1.4;
       width: 160px;
     }
+
+    /* 📱 Responsif */
+    @media (max-width: 600px) {
+      .gift-box { width: 140px; height: 140px; }
+      .gift-box::before { left: 60px; height: 140px; }
+      .gift-box::after { top: 60px; width: 140px; }
+      .lid { width: 160px; height: 45px; }
+      .big-love-text { font-size: 20px; width: 120px; }
+      svg { width: 300px; height: 300px; }
+    }
   </style>
 </head>
 <body>
+  <!-- Stars (dibuat lewat JS) -->
+  
   <!-- Sunset -->
   <div class="sun"></div>
   <div class="cloud" style="top:20%;left:-100px;"></div>
@@ -348,7 +376,16 @@
     });
 
     animate();
+
+    /* ✨ Generate Stars */
+    for (let i = 0; i < 50; i++) {
+      let star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDelay = (Math.random() * 5) + "s";
+      document.body.appendChild(star);
+    }
   </script>
 </body>
 </html>
-
